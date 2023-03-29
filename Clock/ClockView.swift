@@ -30,6 +30,7 @@ struct ClockView: View {
                     .frame(width: size, height: size)
                 
                 // Hour and minute marks
+                
                 ForEach(0..<60) { tick in
                     Rectangle()
                         .fill(Color.black)
@@ -37,6 +38,32 @@ struct ClockView: View {
                         .offset(y: -size / 2 + lineWidth / 2)
                         .rotationEffect(Angle.degrees(Double(tick) / 60 * 360))
                 }
+                
+//                ForEach(0..<12) { hour in
+//                    Text("\(hour == 0 ? 12 : hour)")
+//                        .font(.system(size: lineWidth * 6))
+//                        .fontWeight(.heavy)
+//                        .foregroundColor(.red)
+//                        .offset(x: 0, y: -lineWidth * 38)
+//                        .rotationEffect(Angle.degrees(Double(hour) / 12 * 360))
+//                }
+                
+                ForEach(0..<12) { hour in
+                    let angle = (Double(hour) / 12.0) * 2.0 * .pi
+                    let x = cos(angle) * (lineWidth * 80) 
+                    let y = sin(angle) * (lineWidth * 40)
+                    
+                    Text("\(hour == 0 ? 12 : hour)")
+                        .font(.system(size: lineWidth * 6))
+                        .fontWeight(.heavy)
+                        .foregroundColor(.red)
+                        .offset(x: CGFloat(x), y: CGFloat(y))
+                        .rotationEffect(Angle.radians(-angle))
+                }
+
+                 
+                
+                
                 
                 // Hour, minute, and second hands
                 GeometryReader { geometry in

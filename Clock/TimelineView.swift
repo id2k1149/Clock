@@ -23,7 +23,9 @@ struct ClockPaulView: View {
                 
                 ctx.stroke(Circle()
                     .inset(by: border / 2)
-                    .path(in: rect), with: .color(.primary), lineWidth: border)
+                    .path(in: rect),
+                           with: .color(.primary),
+                           lineWidth: border)
                 
                 ctx.translateBy(x: rect.midX, y: rect.midY)
                 

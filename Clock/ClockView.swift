@@ -47,18 +47,39 @@ struct ClockView: View {
 //                        .rotationEffect(Angle.degrees(Double(hour) / 12 * 360))
 //                }
                 
+//                ForEach(0..<12) { hour in
+//                    let angle = (Double(hour) / 12.0) * 2.0 * .pi
+//                    let x = cos(angle) * (lineWidth * 80)
+//                    let y = sin(angle) * (lineWidth * 40)
+//
+//                    Text("\(hour == 0 ? 12 : hour)")
+//                        .font(.system(size: lineWidth * 6))
+//                        .fontWeight(.heavy)
+//                        .foregroundColor(.red)
+//                        .offset(x: CGFloat(x), y: CGFloat(y))
+//                        .rotationEffect(Angle.radians(-angle))
+//                }
+                
                 ForEach(0..<12) { hour in
-                    let angle = (Double(hour) / 12.0) * 2.0 * .pi
-                    let x = cos(angle) * (lineWidth * 80) 
-                    let y = sin(angle) * (lineWidth * 40)
-                    
+
+                    let angle = Double(hour + 9) * .pi / 6
+                    let x = cos(angle) * (size/2.75)
+                    let y = sin(angle) * (size/2.75)
+
                     Text("\(hour == 0 ? 12 : hour)")
-                        .font(.system(size: lineWidth * 6))
+                        .font(.system(size: lineWidth * 10))
                         .fontWeight(.heavy)
                         .foregroundColor(.red)
                         .offset(x: CGFloat(x), y: CGFloat(y))
-                        .rotationEffect(Angle.radians(-angle))
+//                        .rotationEffect(Angle.radians(angle))
                 }
+                
+                
+                
+//                let point = CGPoint(x: 0, y: -textOffset)
+//                    .applying(CGAffineTransform(rotationAngle: Double(i) * .pi / 6))
+                
+                
 
                  
                 

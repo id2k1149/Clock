@@ -13,7 +13,7 @@ struct ClockView: View {
     var body: some View {
         GeometryReader { geometry in
             // Calculate the size of the clock based on the screen width
-            let size = min(geometry.size.width, geometry.size.height) * 0.8
+            let size = min(geometry.size.width, geometry.size.height) * 0.9
             // Calculate the line width based on the clock size
             let lineWidth: CGFloat = size / 100
             // Calculate the length of the hour hand based on the clock size
@@ -26,16 +26,15 @@ struct ClockView: View {
             ZStack {
                 // Clock face
                 Circle()
-                    .fill(Color.white)
+                    .fill(Color.primary)
                     .frame(width: size, height: size)
                 
                 // Hour and minute marks
-                
                 ForEach(0..<60) { tick in
                     Rectangle()
-                        .fill(Color.black)
-                        .frame(width: 2, height: tick % 5 == 0 ? lineWidth * 3 : lineWidth)
-                        .offset(y: -size / 2 + lineWidth / 2)
+                        .fill(Color.red)
+                        .frame(width: 2, height: tick % 5 == 0 ? lineWidth * 6 : lineWidth * 3)
+                        .offset(y: -size / 2 + lineWidth * 3)
                         .rotationEffect(Angle.degrees(Double(tick) / 60 * 360))
                 }
                 
@@ -72,7 +71,7 @@ struct ClockView: View {
                         path.move(to: CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2))
                         path.addLine(to: CGPoint(x: geometry.size.width / 2, y: hourHandLength))
                     }
-                    .stroke(Color.black, lineWidth: lineWidth * 3)
+                    .stroke(Color.red, lineWidth: lineWidth * 2)
                     .rotationEffect(Angle.degrees(Double(Calendar.current.component(.hour, from: currentTime)) / 12 * 360 + 180))
                     .rotationEffect(Angle.degrees(Double(Calendar.current.component(.minute, from: currentTime)) / 60 * 30), anchor: .center)
                     
@@ -81,7 +80,7 @@ struct ClockView: View {
                         path.move(to: CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2))
                         path.addLine(to: CGPoint(x: geometry.size.width / 2, y: minuteHandLength))
                     }
-                    .stroke(Color.black, lineWidth: lineWidth * 2)
+                    .stroke(Color.red, lineWidth: lineWidth * 2)
                     .rotationEffect(Angle.degrees(Double(Calendar.current.component(.minute, from: currentTime)) / 60 * 360 + 180), anchor: .center)
                     
                     // Second Hand
@@ -109,8 +108,7 @@ struct ClockView: View {
     }
 }
 
-
- struct ClockView_Previews: PreviewProvider {
+struct ClockView_Previews: PreviewProvider {
      static var previews: some View {
         ClockView()
      }
